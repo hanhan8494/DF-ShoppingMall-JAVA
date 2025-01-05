@@ -10,7 +10,13 @@
         <option value="$PROJECT_DIR$/Mall-dao/pom.xml" />
         <option value="$PROJECT_DIR$/Mall-pojo/pom.xml" />
         <option value="$PROJECT_DIR$/Mall-common/pom.xml" />
+        <option value="$PROJECT_DIR$/Mall-applet/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Mall-applet-shop/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">

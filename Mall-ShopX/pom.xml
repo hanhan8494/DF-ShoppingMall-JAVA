@@ -11,7 +11,7 @@
     <modules>
 
         <module>Mall-web-admin</module>
-        <module>Mall-shop-rider</module>
+        <module>Mall-applet</module>
         <module>Mall-common</module>
         <module>Mall-pojo</module>
     </modules>
