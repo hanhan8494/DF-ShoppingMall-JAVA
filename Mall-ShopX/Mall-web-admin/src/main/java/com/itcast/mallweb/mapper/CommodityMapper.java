@@ -1,9 +1,7 @@
 package com.itcast.mallweb.mapper;
 
-import com.itcast.admin.entity.Commodity;
-import com.itcast.admin.entity.DityAll;
-import com.itcast.admin.entity.DityAlls;
-import com.itcast.admin.entity.DityUrl;
+import com.itcast.admin.entity.*;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,8 +12,6 @@ import java.util.List;
 public interface CommodityMapper {
 
     //新增商品
-    @Insert("insert into commodity(id, name, discount, price, number, present, status, sort_id) " +
-            "values (#{id},#{name},#{discount},#{price},#{number},#{present},#{status},#{sortId})")
     void dityAdd(Commodity commodity);
 
     //存储新增商品的图片
@@ -34,4 +30,12 @@ public interface CommodityMapper {
 
     //批量删除商品图片
     void dityUrlDetele(List<Integer> ids);
+
+    //修改商品信息
+    void dityAmend(Commodity commodity);
+
+    //根据id删除图片
+    @Delete("DELETE FROM dity_url WHERE dity_id = #{id};")
+    void dityUrlAmendDetele(Long id);
+
 }

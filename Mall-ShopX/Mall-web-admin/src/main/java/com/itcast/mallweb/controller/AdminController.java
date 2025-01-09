@@ -31,7 +31,7 @@ public class AdminController {
     @Autowired
     private JwtProperties jwtProperties;
 
-
+    //接口已通过-OK
     @PostMapping("/login")
     @ApiOperation("管理员登录")
     public Result<AdminLoginVO> login(@RequestBody AdminDTO adminDTO) throws AccountNotFoundException {
@@ -55,7 +55,7 @@ public class AdminController {
 
         return Result.success(employeeLoginVO);
     }
-
+    //接口已通过-OK
     @PostMapping("/add")
     @ApiOperation("新增管理员")
     public Result addAdmin(@RequestBody Admin admin) {
@@ -63,7 +63,7 @@ public class AdminController {
         adminService.addAdmin(admin);
         return Result.success();
     }
-
+    //接口已通过-OK
     @PostMapping("/detele")
     @ApiOperation("删除管理员")
     public Result deteleAdmin(@RequestBody List<Long> ids) {
@@ -71,7 +71,7 @@ public class AdminController {
         adminService.deteleAdmin(ids);
         return Result.success();
     }
-
+    //接口已通过-OK
     @GetMapping("/query")
     @ApiOperation("查询单个管理员")
     public Result<Admin> getById(@RequestParam Long id) {
@@ -79,7 +79,7 @@ public class AdminController {
         Admin admin = adminService.getById(id);
         return Result.success(admin);
     }
-
+    //接口已通过-OK
     @GetMapping("/queryAll")
     @ApiOperation("查询全部管理员")
     public Result<List<Admin>> getAdmin() {
@@ -88,10 +88,13 @@ public class AdminController {
         return Result.success(admin);
     }
 
-
-
-
-
+//    @PostMapping("/amend") TODO 修改有差异
+//    @ApiOperation("修改管理员")
+//    public Result amendAdmin(@RequestBody ) {
+//        log.info("修改管理员的信息为：{}", ids);
+//        adminService.deteleAdmin(ids);
+//        return Result.success();
+//    }
 
 
 

@@ -13,25 +13,22 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "商品接收的数据")
-public class CommodityDTO {
+@ApiModel(description = "新增或修改用户数据")
+public class UserDTO {
 
     @ApiModelProperty("主键值")
     private Long id;
 
-    @ApiModelProperty("商品名称")
+    @ApiModelProperty("用户名")
     private String name;
 
-    @ApiModelProperty("商品价格")
-    private double price;
+    @ApiModelProperty("电话号码")
+    private String phone;
 
-    @ApiModelProperty("库存数量")
-    private Integer number;
+    @ApiModelProperty("性别")
+    private String sex;
 
-    @ApiModelProperty("商品描述")
-    private String present;
-
-    @ApiModelProperty("分类表Id")
-    private Integer sortId;
+    @ApiModelProperty("头像")
+    private String avatar;
 
 }

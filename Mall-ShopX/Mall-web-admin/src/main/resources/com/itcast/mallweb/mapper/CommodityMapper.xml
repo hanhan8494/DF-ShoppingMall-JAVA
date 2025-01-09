@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itcast.mallweb.mapper.CommodityMapper">
+
+    <!-- 新增商品： insert运行完主键会赋值给key里的id-固定写法-->
+    <insert id="dityAdd" useGeneratedKeys="true" keyProperty="id">
+        insert into commodity(name, discount, price, number, present, status, sort_id, create_time)
+        values (#{name},#{discount},#{price},#{number},#{present},#{status},#{sortId},#{createTime})
+    </insert>
+
+
+<!--    新增商品的图片-->
+ <insert id="dityUrl">
+     insert into dity_url(dity_id, avatar)
+     values
+     <foreach collection="list" item="key" separator=",">
+         (#{key.dityId},#{key.avatar})
+     </foreach>
+ </insert>
+
+<!--    批量删除商品-->
+    <delete id="dityDetele">
+        delete from commodity where id in
+        <foreach collection="ids" item="id" separator=","  open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+
+<!--    批量删除商品图片-->
+    <delete id="dityUrlDetele">
+        delete from dity_url where dity_id in
+        <foreach collection="ids" item="id" separator=","  open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <!--    修改商品-->
+    <update id="dityAmend">
+        update commodity
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="discount != null">
+                discount = #{discount},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="number != null">
+                avatar = #{avatar},
+            </if>
+            <if test="present != null and present != ''">
+                present = #{present},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="sortId != null and sortId != ''">
+                sortId = #{sortId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

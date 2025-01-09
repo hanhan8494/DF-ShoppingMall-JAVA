@@ -2,6 +2,7 @@ package com.itcast.mallweb.service.impl;
 
 
 import com.itcast.admin.dto.CommodityDTO;
+import com.itcast.admin.dto.CommondityAmendDTO;
 import com.itcast.admin.entity.*;
 import com.itcast.admin.vo.DityVO;
 import com.itcast.constant.MessageConstant;
@@ -33,31 +34,32 @@ public class CommodityServiceImpl implements CommodityService {
     @Transactional
     public Result<String> dityAdd(CommodityDTO commodityDTO, MultipartFile[] files) {
         Commodity commodity = new Commodity();
-        BeanUtils.copyProperties(commodityDTO, commodity);
-        Commodity.builder()
+        commodity = commodity.builder()
+                .discount(9.9)
                 .status(1)
                 .createTime(LocalDateTime.now())
                 .build();
+        BeanUtils.copyProperties(commodityDTO, commodity);
 
+        commodityMapper.dityAdd(commodity);
         List<String> urls = new ArrayList<>();
         //图片路径存储
         for (MultipartFile file : files) {
             try {
                 //原始文件名
                 String originalFilename = file.getOriginalFilename();
-                urls.add(originalFilename);
                 //截取原始文件名的后缀 37-57cj.png
                 String extension = originalFilename.substring(originalFilename.lastIndexOf("."));//截取最后一个点的后半部分
                 //构建新文件名称
                 String objectName = UUID.randomUUID().toString() + extension;
                 //文件的请求路径
                 String upload = aliOssUtil.upload(file.getBytes(), objectName); //把这个返回给前端
-                return Result.success(upload);
+                urls.add(upload);
             } catch (IOException e) {
                 log.error("文件上传失败：{}", e);
             }
-            return Result.error(MessageConstant.UPLOAD_FAILED);
         }
+
         //生成一个实体图片存储
         List<DityUrl> dityUrls = new ArrayList<>();
         for (String url : urls) {
@@ -69,7 +71,7 @@ public class CommodityServiceImpl implements CommodityService {
             dityUrls.add(build);
         }
         //前面运行完毕之后新增商品
-        commodityMapper.dityAdd(commodity);
+
         commodityMapper.dityUrl(dityUrls);
         return Result.success();
     }
@@ -151,6 +153,28 @@ public class CommodityServiceImpl implements CommodityService {
         commodityMapper.dityDetele(ids);
         //删除商品图片
         commodityMapper.dityUrlDetele(ids);
+    }
+
+    //修改商品
+    public void dityAmend(CommondityAmendDTO commondityAmendDTO) {
+         Commodity commodity = new Commodity();
+         BeanUtils.copyProperties(commondityAmendDTO, commodity);
+        //修改商品
+        commodityMapper.dityAmend(commodity);
+        //修改商品的图片 - 先删除图片 - 再新增图片
+        Long id = commondityAmendDTO.getId();
+        commodityMapper.dityUrlAmendDetele(id);
+        //新增 - 根据id新增
+        List<String> avatar = commondityAmendDTO.getAvatar();
+        List<DityUrl> list = new ArrayList<>();
+        for (int i = 0; i < avatar.size(); i++) {
+            DityUrl build = DityUrl.builder()
+                    .dityId(commodity.getId())
+                    .avatar(avatar.get(i))
+                    .build();
+            list.add(build);
+        }
+        commodityMapper.dityUrl(list);
     }
 
 

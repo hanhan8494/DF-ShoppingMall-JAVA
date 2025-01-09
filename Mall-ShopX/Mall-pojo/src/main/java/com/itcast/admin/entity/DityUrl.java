@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 public class DityUrl {
 
     @ApiModelProperty("主键值")
-    private Long id;
+    private int id;
 
     @ApiModelProperty("关联商品id")
-    private Long dityId;
+    private int dityId;
 
     @ApiModelProperty("图片路径")
     private String avatar;

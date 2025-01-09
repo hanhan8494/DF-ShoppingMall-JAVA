@@ -1,4 +1,5 @@
-package com.itcast.admin.entity;
+package com.itcast.admin.dto;
+
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,18 +8,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "商品实体类")
-public class Commodity {
+@ApiModel(description = "商品修改的数据")
+public class CommondityAmendDTO {
 
     @ApiModelProperty("主键值")
-    private int id;
+    private Long id;
 
     @ApiModelProperty("商品名称")
     private String name;
@@ -41,6 +41,6 @@ public class Commodity {
     @ApiModelProperty("分类表Id")
     private Integer sortId;
 
-    @ApiModelProperty("商品创建时间")
-    private LocalDateTime createTime;
+    @ApiModelProperty("商品图片")
+    private List<String> avatar;
 }

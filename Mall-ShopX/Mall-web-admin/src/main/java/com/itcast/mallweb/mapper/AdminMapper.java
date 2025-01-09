@@ -15,8 +15,8 @@ public interface AdminMapper {
     Admin getByAccount(String account);
 
     //新增管理员
-    @Insert("insert into admin (id, adminName, account, password, status, create_time, sorct) " +
-            "values (#{id},#{adminName},#{account},#{password},#{status},#{createTime},#{sorct})") //TODO 优化公共字段
+    @Insert("insert into admin (adminName, account, password, status, create_time, sorct) " +
+            "values (#{adminName},#{account},#{password},#{status},#{createTime},#{sorct})") //TODO 优化公共字段
     void addAdmin(Admin admin);
 
     //删除管理员

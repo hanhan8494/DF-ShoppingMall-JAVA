@@ -1,6 +1,5 @@
 package com.itcast.admin.entity;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,30 +13,28 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "管理员实体类")
-public class Admin {
-
-    private static final long serialVersionUID = 1L;
+@ApiModel(description = "用户实体类")
+public class User {
 
     @ApiModelProperty("主键值")
     private Long id;
 
-    @ApiModelProperty("管理员名字")
-    private String adminName;
+    @ApiModelProperty("openid")
+    private String openid;
 
-    @ApiModelProperty("账号")
-    private String account;
+    @ApiModelProperty("用户名")
+    private String name;
 
-    @ApiModelProperty("密码")
-    private String password;
+    @ApiModelProperty("电话号码")
+    private String phone;
 
-    @ApiModelProperty("状态")
-    private Integer status;
+    @ApiModelProperty("性别")
+    private String sex;
+
+    @ApiModelProperty("头像")
+    private String avatar;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
-
-    @ApiModelProperty("级别")
-    private Integer sorct;
 
 }

@@ -1,6 +1,7 @@
 package com.itcast.mallweb.service;
 
 import com.itcast.admin.dto.CommodityDTO;
+import com.itcast.admin.dto.CommondityAmendDTO;
 import com.itcast.admin.vo.DityVO;
 import com.itcast.result.Result;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,4 +20,7 @@ public interface CommodityService {
 
     //批量删除商品
     void dityDetele(List<Integer> ids);
+
+    //修改商品
+    void dityAmend(CommondityAmendDTO commondityAmendDTO);
 }

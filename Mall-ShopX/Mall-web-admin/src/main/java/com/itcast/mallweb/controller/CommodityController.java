@@ -2,6 +2,7 @@ package com.itcast.mallweb.controller;
 
 import com.itcast.admin.dto.AdminDTO;
 import com.itcast.admin.dto.CommodityDTO;
+import com.itcast.admin.dto.CommondityAmendDTO;
 import com.itcast.admin.entity.Admin;
 import com.itcast.admin.vo.AdminLoginVO;
 import com.itcast.admin.vo.DityVO;
@@ -28,7 +29,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/dity")
+@RequestMapping("/admin/dity")
 @Slf4j
 @Api(tags = "web-商品相关接口")
 public class CommodityController {
@@ -36,7 +37,7 @@ public class CommodityController {
     @Autowired
     private CommodityService commodityService;
 
-
+    //接口已通过-OK
     @PostMapping("/add")
     @ApiOperation("新增商品接口")
     public Result<String> dityAdd(CommodityDTO commodityDTO, @RequestParam("image") MultipartFile[] files) {
@@ -45,7 +46,7 @@ public class CommodityController {
         commodityService.dityAdd(commodityDTO, files);
         return Result.success();
     }
-
+    //接口已通过-OK
     @GetMapping("/query")
     @ApiModelProperty("查询单个商品")
     public Result<DityVO> dityQuery(@RequestParam Integer id) {
@@ -53,7 +54,7 @@ public class CommodityController {
         DityVO dityVO = commodityService.dityQuery(id);
         return Result.success(dityVO);
     }
-
+    //接口已通过-OK
     @GetMapping("/queryAll")
     @ApiModelProperty("查询全部商品")
     public Result<List<DityVO>> dityAllQuery() {
@@ -61,7 +62,7 @@ public class CommodityController {
         List<DityVO> dityVOlist = commodityService.dityAllQuery();
         return Result.success(dityVOlist);
     }
-
+    //接口已通过-OK
     @PostMapping("/detele")
     @ApiModelProperty("批量删除商品")
     public Result dityDetele(@RequestBody List<Integer> ids) {
@@ -69,9 +70,13 @@ public class CommodityController {
         commodityService.dityDetele(ids);
         return Result.success();
     }
-
-
-
-
+    // TODO 加图片
+    @PostMapping("/amend")
+    @ApiModelProperty("修改商品")
+    public Result dityAmend(@RequestBody CommondityAmendDTO commondityAmendDTO) {
+        log.info("修改商品的信息为：{}",commondityAmendDTO);
+        commodityService.dityAmend(commondityAmendDTO);
+        return Result.success();
+    }
 
 }
