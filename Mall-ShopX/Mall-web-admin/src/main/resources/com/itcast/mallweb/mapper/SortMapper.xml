@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itcast.mallweb.mapper.SortMapper">
+
+    <!--    修改分类-->
+    <update id="amendSort">
+        update sort
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--    批量删除分类-->
+    <delete id="deleteSort">
+        delete from sort where id in
+        <foreach collection="ids" item="id" separator=","  open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>
